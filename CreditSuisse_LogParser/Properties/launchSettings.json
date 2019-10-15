@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CreditSuisse_LogParser": {
+      "commandName": "Project",
+      "commandLineArgs": "log.txt"
+    }
+  }
+}
