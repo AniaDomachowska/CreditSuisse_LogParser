@@ -30,7 +30,7 @@ namespace CreditSuisse_LogParser.Tests
                 TimeStamp = 1491377495213,
                 Host = null,
                 Type = null,
-                State = "STARTED"
+                State = LogEventStateEnum.STARTED
             });
 
             File.Delete(tempFileName);

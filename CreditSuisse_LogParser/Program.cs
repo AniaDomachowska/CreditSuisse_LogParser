@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Threading.Tasks;
 using CreditSuisse_LogParser.Logic;
 
 namespace CreditSuisse_LogParser
@@ -15,7 +14,16 @@ namespace CreditSuisse_LogParser
                 return;
             }
 
-            using (var eventLogger = new EventLogger())
+            const string dbName = @"events.db";
+            var dbFolder = AppDomain.CurrentDomain.BaseDirectory;
+
+            var dbPath = Path.Combine(dbFolder, dbName);
+            if (File.Exists(dbPath))
+            {
+                File.Delete(dbPath);
+            }
+
+            using (var eventLogger = new EventLogger(dbFolder, dbName))
             {
                 var eventLoader = new EventLoader(
                     eventLogger,
@@ -25,6 +33,7 @@ namespace CreditSuisse_LogParser
                 var filePath = Path.Join(AppDomain.CurrentDomain.BaseDirectory, args[0]);
                 eventLoader.Load(filePath);
 
+                Console.WriteLine("Finished importing log files. Total imported: {0}", eventLogger.TotalLogged);
             }
         }
     }

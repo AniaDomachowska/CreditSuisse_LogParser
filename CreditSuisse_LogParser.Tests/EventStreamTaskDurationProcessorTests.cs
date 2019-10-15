@@ -66,7 +66,7 @@ namespace CreditSuisse_LogParser.Tests
                 Id = "123abc",
                 Host = "testHost",
                 Type = "type",
-                State = "STARTED",
+                State = LogEventStateEnum.STARTED,
                 TimeStamp = 10000
             };
 
@@ -99,7 +99,7 @@ namespace CreditSuisse_LogParser.Tests
                 Id = "123abc",
                 Host = "testHost",
                 Type = "type",
-                State = "STARTED",
+                State = LogEventStateEnum.STARTED,
                 TimeStamp = 10000
             };
 

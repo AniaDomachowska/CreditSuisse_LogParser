@@ -31,7 +31,6 @@ namespace CreditSuisse_LogParser.Logic
 
             // Case when new event arrives - log it so later the duration can be calculated.
             Log.Debug("Found new event: {logEntry}", logEntry);
-
             AddInternalLogEntryIndex(logEntry);
         }
 
