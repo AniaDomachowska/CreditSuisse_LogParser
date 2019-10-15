@@ -13,15 +13,18 @@ namespace CreditSuisse_LogParser.Tests
         [Fact]
         public async Task ForCommonLog_ReadsItFromFile()
         {
+            // Arrange
             var tempFileName = Path.GetTempFileName();
             File.WriteAllText(tempFileName,
                 @"{""id"":""scsmbstgrb"", ""state"":""STARTED"", ""timestamp"": 1491377495213}");
 
-            var testee = new EventStreamProvider(tempFileName);
+            var sut = new EventStreamProvider();
 
-            await testee.Read();
+            // Act
+            await sut.Read(tempFileName);
 
-            testee.Events.Should().ContainEquivalentOf(new LogEvent
+            // Assert
+            sut.Events.Should().ContainEquivalentOf(new LogEvent
             {
                 Id = "scsmbstgrb",
                 TimeStamp = 1491377495213,

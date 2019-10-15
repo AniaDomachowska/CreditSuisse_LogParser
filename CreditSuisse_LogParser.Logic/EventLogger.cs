@@ -9,13 +9,9 @@ namespace CreditSuisse_LogParser.Logic
     {
         private readonly LiteDatabase database;
 
-        public EventLogger(string dbName = @"events.db")
+        public EventLogger(string dbFolder = null, string dbName = @"events.db")
         {
-            var databaseFile = Path.Join(AppDomain.CurrentDomain.BaseDirectory, dbName);
-            if (File.Exists(databaseFile))
-            {
-                File.Delete(databaseFile);
-            }
+            var databaseFile = Path.Join(dbFolder ?? AppDomain.CurrentDomain.BaseDirectory, dbName);
 
             database = new LiteDatabase($"Filename={databaseFile}");
         }
@@ -31,6 +27,7 @@ namespace CreditSuisse_LogParser.Logic
         {
             var col = database.GetCollection<LogEventInfo>("logEventInfos");
             col.Insert(logEventInfo);
+            Serilog.Log.Debug("Logged event info: {logEventInfo}", logEventInfo);
         }
     }
 
